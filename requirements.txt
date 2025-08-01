@@ -1,0 +1,6 @@
+aiogram~=3.21.0
+decouple~=0.0.7
+APScheduler~=3.11.0
+python-decouple~=3.8
+pydantic-settings~=2.10.1
+Faker~=37.5.3
