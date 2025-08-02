@@ -53,6 +53,6 @@ def admin_inline_kb() -> InlineKeyboardMarkup:
         [InlineKeyboardButton(text='Settings', callback_data='admin_settings')],
         [InlineKeyboardButton(text='Statistic', callback_data='admin_statistic')],
         [InlineKeyboardButton(text='Admin commands', web_app=WebAppInfo(
-            url="http://localhost:63342/FirstAiogramBot/templates/admin-command.html"))],
+            url="https://github.com/EliseevIlya/FirstAiogramBot/blob/master/templates/admin-command.html"))],
     ]
     return InlineKeyboardMarkup(inline_keyboard=inline_kb_list)
