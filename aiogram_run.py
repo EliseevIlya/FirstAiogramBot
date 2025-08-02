@@ -4,7 +4,7 @@ import asyncio
 from create_bot import bot, dispatcher
 from handlers.admin_handler import admin_router
 from handlers.inline_handler import inline_router
-from handlers.start import start_router
+from handlers.start_handler import start_router
 from utils.commands import set_commands
 
 
