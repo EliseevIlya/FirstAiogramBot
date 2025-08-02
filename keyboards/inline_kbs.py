@@ -41,9 +41,18 @@ def faq_inline_kb(questions: dict = questions) -> InlineKeyboardMarkup:
 
 
 def faq_answer_kb() -> InlineKeyboardMarkup:
-
     inline_kb_list = [
         [InlineKeyboardButton(text='ДА', callback_data='faq')],
         [InlineKeyboardButton(text='НЕТ', callback_data='base_home')],
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb_list)
+
+
+def admin_inline_kb() -> InlineKeyboardMarkup:
+    inline_kb_list = [
+        [InlineKeyboardButton(text='Settings', callback_data='admin_settings')],
+        [InlineKeyboardButton(text='Statistic', callback_data='admin_statistic')],
+        [InlineKeyboardButton(text='Admin commands', web_app=WebAppInfo(
+            url="http://localhost:63342/FirstAiogramBot/templates/admin-command.html"))],
     ]
     return InlineKeyboardMarkup(inline_keyboard=inline_kb_list)

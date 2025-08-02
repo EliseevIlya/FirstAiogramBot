@@ -2,12 +2,14 @@ import asyncio
 
 
 from create_bot import bot, dispatcher
+from handlers.admin_handler import admin_router
 from handlers.inline_handler import inline_router
 from handlers.start import start_router
 from utils.commands import set_commands
 
 
 async def main():
+    dispatcher.include_router(admin_router)
     dispatcher.include_router(start_router)
     dispatcher.include_router(inline_router)
 

@@ -1,11 +1,8 @@
 import asyncio
 
-from aiogram import Router
 from aiogram import Router, F
-from aiogram.filters import CommandStart, Command, CommandObject
 from aiogram.types import Message, CallbackQuery
 from aiogram.utils.chat_action import ChatActionSender
-from pyexpat.errors import messages
 
 from keyboards.inline_kbs import inline_link_kb, inline_user_kb, faq_inline_kb, faq_answer_kb
 from keyboards.main_keyboard import main_kb
