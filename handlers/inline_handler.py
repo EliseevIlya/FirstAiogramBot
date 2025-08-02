@@ -42,7 +42,7 @@ async def get_random_user(callback_query: CallbackQuery):
 async def back_handler(callback_query: CallbackQuery):
     await callback_query.answer("Переход к базовым функциям", show_alert=True)
     await callback_query.message.delete()
-    await callback_query.message.answer('Базовые функции', reply_markup=main_kb(callback_query.message.from_user.id))
+    await callback_query.message.answer('Базовые функции', reply_markup=main_kb(callback_query.from_user.id))
 
 
 @inline_router.message(F.text.lower() == 'faq')

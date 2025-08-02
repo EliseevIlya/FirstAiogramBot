@@ -54,5 +54,16 @@ def admin_inline_kb() -> InlineKeyboardMarkup:
         [InlineKeyboardButton(text='Statistic', callback_data='admin_statistic')],
         [InlineKeyboardButton(text='Admin commands', web_app=WebAppInfo(
             url="https://github.com/EliseevIlya/FirstAiogramBot/blob/master/templates/admin-command.html"))],
+        [InlineKeyboardButton(text="⬅️ Выйти", callback_data="base_home")]
     ]
     return InlineKeyboardMarkup(inline_keyboard=inline_kb_list)
+
+
+def admin_settings_kb():
+    buttons = [
+        [InlineKeyboardButton(text="➕ Добавить админа", callback_data="add_admin")],
+        [InlineKeyboardButton(text="➕ Добавить вопрос", callback_data="add_question")],
+        [InlineKeyboardButton(text="📋 Список вопросов", callback_data="list_questions")],
+        [InlineKeyboardButton(text="⬅️ Выйти", callback_data="base_home")]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=buttons)
