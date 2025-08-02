@@ -49,7 +49,7 @@ async def add_admin_process(message: Message, state: FSMContext):
 
     reply_message = add_admin(user_id)
 
-    await message.answer(reply_message, parse_mode="Markdown")
+    await message.answer(reply_message)
     await state.clear()
 
 
@@ -59,6 +59,15 @@ async def add_question_start(callback: CallbackQuery, state: FSMContext):
     await callback.message.edit_text("📝 Введите текст вопроса:")
     await state.set_state("waiting_question_text")
 
+""""
+class AddAdmin(StatesGroup):
+    waiting_admin_id = State()
+
+await state.set_state(AddAdmin.waiting_admin_id)
+
+@router.message(AddAdmin.waiting_admin_id)
+
+"""
 
 
 @admin_router.message(StateFilter("waiting_question_text"))
@@ -78,7 +87,7 @@ async def add_question_answer(message: Message, state: FSMContext):
 
     await message.answer(f"✅ Вопрос добавлен под ID `{new_id}`:\n\n"
                          f"**Вопрос:** {question_text}\n"
-                         f"**Ответ:** {answer_text}", parse_mode="Markdown", reply_markup=admin_inline_kb())
+                         f"_Ответ:_ {answer_text}", parse_mode="MarkdownV2", reply_markup=admin_inline_kb())
     await state.clear()
 
 
