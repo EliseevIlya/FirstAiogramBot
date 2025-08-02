@@ -1,11 +1,16 @@
+import asyncio
+
 from aiogram import Router
 from aiogram import Router, F
 from aiogram.filters import CommandStart, Command, CommandObject
 from aiogram.types import Message, CallbackQuery
+from aiogram.utils.chat_action import ChatActionSender
+from pyexpat.errors import messages
 
-from keyboards.inline_kbs import inline_link_kb, inline_user_kb
+from keyboards.inline_kbs import inline_link_kb, inline_user_kb, faq_inline_kb, faq_answer_kb
 from keyboards.main_keyboard import main_kb
 from utils.fake_user import get_random_person
+from utils.temporary_db import get_answer
 
 inline_router = Router()
 
@@ -36,8 +41,29 @@ async def get_random_user(callback_query: CallbackQuery):
     await callback_query.message.answer(reply)
 
 
-@inline_router.callback_query(F.data == 'back')
+@inline_router.callback_query(F.data == 'base_home')
 async def back_handler(callback_query: CallbackQuery):
-    await callback_query.answer()
+    await callback_query.answer("Переход к базовым функциям", show_alert=True)
     await callback_query.message.delete()
     await callback_query.message.answer('Базовые функции', reply_markup=main_kb(callback_query.message.from_user.id))
+
+
+@inline_router.message(F.text.lower() == 'faq')
+async def faq_handler(message: Message):
+    await message.answer('FAQ', reply_markup=faq_inline_kb())
+
+
+@inline_router.callback_query(F.data == 'faq')
+async def faq_handler(callback_query: CallbackQuery):
+    await callback_query.answer()
+    await callback_query.message.answer('FAQ', reply_markup=faq_inline_kb())
+
+
+@inline_router.callback_query(F.data.startswith('qst_'))
+async def cmd_start(callback_query: CallbackQuery):
+    await callback_query.answer()
+    qst_id = int(callback_query.data.replace('qst_', ''))
+    message = get_answer(qst_id)
+    async with ChatActionSender.typing(bot=callback_query.bot, chat_id=callback_query.from_user.id):
+        await asyncio.sleep(1.5)
+        await callback_query.message.answer(message, reply_markup=faq_answer_kb())

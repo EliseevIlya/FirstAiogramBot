@@ -3,7 +3,7 @@ from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, KeyboardButtonPol
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
 
-def special_kb():
+def special_kb() -> ReplyKeyboardMarkup:
     kb_list = [
         [KeyboardButton(text="Отправить геолокацию", request_location=True)],
         [KeyboardButton(text="Поделиться номером", request_contact=True)],
@@ -40,7 +40,7 @@ def special_kb():
     return keyboard
 
 
-def rating_kb():
+def rating_kb() -> ReplyKeyboardMarkup:
     builder = ReplyKeyboardBuilder()
     for item in [str(i) for i in range(1, 11)]:
         builder.button(text=item)

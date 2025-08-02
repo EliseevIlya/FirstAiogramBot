@@ -1,11 +1,12 @@
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
+from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardMarkup
 from create_bot import admins
 
 
-def main_kb(user_telegram_id: int):
+def main_kb(user_telegram_id: int) -> ReplyKeyboardMarkup:
     kb_list = [
         [KeyboardButton(text="📖 О нас"), KeyboardButton(text="👤 Профиль")],
-        [KeyboardButton(text="📝 Заполнить анкету"), KeyboardButton(text="📚 Каталог")]
+        [KeyboardButton(text="📝 Заполнить анкету"), KeyboardButton(text="📚 Каталог")],
+        [KeyboardButton(text='FAQ')],
     ]
     if user_telegram_id in admins:
         kb_list.append([KeyboardButton(text="⚙️ Админ панель")])

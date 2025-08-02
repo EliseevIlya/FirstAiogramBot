@@ -1,6 +1,7 @@
 from faker import Faker
 
-def get_random_person():
+
+def get_random_person() -> dict[str, str]:
     fake = Faker('ru_RU')
 
     user = {
