@@ -1,6 +1,5 @@
 /__pycache__
 /.idea
 .env
-/keyboards/__pycache__
-/keyboards/__pycache__
-/utils/__pycache__
+**/__pycache__/
+
