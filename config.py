@@ -9,3 +9,20 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+
+def update_env_file(key: str, value: str):
+    """Обновляет переменную в .env файле"""
+    with open(".env", "r", encoding="utf-8") as file:
+        lines = file.readlines()
+
+    with open(".env", "w", encoding="utf-8") as file:
+        found = False
+        for line in lines:
+            if line.strip().startswith(f"{key}="):
+                file.write(f"{key}={value}\n")
+                found = True
+            else:
+                file.write(line)
+        if not found:
+            file.write(f"{key}={value}\n")
