@@ -9,6 +9,8 @@ async def set_commands(bot: Bot) -> None:
                 BotCommand(command='special_keyboard', description='Спец возможности'),
                 BotCommand(command='rating_keyboard', description='Рейтинг'),
                 BotCommand(command='base', description='Базовые функции'),
-                BotCommand(command='faq',description='FAQ')
+                BotCommand(command='faq',description='FAQ'),
+                BotCommand(command='html_format', description='HTML теги применение'),
+                BotCommand(command='html_raw', description='HTML теги экранирование')
                 ]
     await bot.set_my_commands(commands, BotCommandScopeDefault())

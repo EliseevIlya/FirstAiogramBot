@@ -1,8 +1,11 @@
 from aiogram import Router, F
 from aiogram.filters import CommandStart, Command, CommandObject
 from aiogram.types import Message
+
+from create_bot import bot
 from keyboards.main_keyboard import main_kb
 from keyboards.function_keyboard import special_kb, rating_kb
+import html
 
 start_router = Router()
 
@@ -55,3 +58,34 @@ async def cmd_settings(message: Message, command: CommandObject):
         await message.answer(f'setting {command_args}')
     await message.answer(f'settings')
 
+
+@start_router.message(Command(commands=['html_format']))
+async def cmd_html_format(message: Message):
+    text = (
+        "<b>Жирный</b>\n"
+        "<i>Курсив</i>\n"
+        "<u>Подчеркнутый</u>\n"
+        "<s>Зачеркнутый</s>\n"
+        "<tg-spoiler>Спойлер (нажми, чтобы увидеть)</tg-spoiler>\n"
+        "<a href='https://example.com'>Ссылка</a>\n"
+        "<code>Код</code>\n"
+        "<pre>Большой кодовый блок</pre>"
+    )
+    await message.reply(text)
+
+
+@start_router.message(Command(commands=['html_raw']))
+async def cmd_html_raw(message: Message):
+    text = """
+    <b>Жирный</b>
+    <i>Курсив</i>
+    <u>Подчеркнутый</u>
+    <s>Зачеркнутый</s>
+    <tg-spoiler>Спойлер (скрытый текст)</tg-spoiler>
+    <a href="http://www.example.com/">Ссылка в тексте</a>
+    <code>Код с копированием текста при клике</code>
+    <pre>Спойлер с копированием текста</pre>
+    """.strip()
+    escaped_text = html.escape(text)
+    await bot.send_message(chat_id=message.chat.id, text=escaped_text, reply_to_message_id=message.message_id)
+    await message.forward(chat_id=message.from_user.id)
